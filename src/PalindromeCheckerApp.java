@@ -1,29 +1,22 @@
 public class PalindromeCheckerApp {
 
-    public static void main(String[] args) {
+    // UC6 — User Input Palindrome
+    java.util.Scanner scanner = new java.util.Scanner(System.in);
 
-        // UC5 — Stack Based Palindrome
-        String wordUC5 = "radar";
+System.out.print("Enter a word: ");
+    String userWord = scanner.nextLine();
 
-        java.util.Stack<Character> stack = new java.util.Stack<>();
+    String reversedUC6 = "";
 
-// Push characters
-        for (int i = 0; i < wordUC5.length(); i++) {
-            stack.push(wordUC5.charAt(i));
-        }
+// Reverse the input
+for (int i = userWord.length() - 1; i >= 0; i--) {
+        reversedUC6 += userWord.charAt(i);
+    }
 
-// Build reversed word using stack
-        String reversed = "";
-
-        while (!stack.isEmpty()) {
-            reversed += stack.pop();
-        }
-
-// Compare
-        if (wordUC5.equals(reversed)) {
-            System.out.println(wordUC5 + " is a Palindrome (Stack Method)");
-        } else {
-            System.out.println(wordUC5 + " is NOT a Palindrome (Stack Method)");
-        }
-
+// Check palindrome
+if (userWord.equalsIgnoreCase(reversedUC6)) {
+        System.out.println(userWord + " is a Palindrome (User Input)");
+    } else {
+        System.out.println(userWord + " is NOT a Palindrome (User Input)");
+    }
 }
