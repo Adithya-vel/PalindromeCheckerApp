@@ -1,32 +1,23 @@
-public class PalindromeCheckerApp {
+// UC5 — Stack Based Palindrome
+String wordUC5 = "radar";
 
-    public static void main(String[] args) {
+java.util.Stack<Character> stack = new java.util.Stack<>();
 
-        // UC1 — Welcome Message
-        System.out.println("=================================");
-        System.out.println("     PALINDROME CHECKER APP      ");
-        System.out.println("=================================");
-        System.out.println("Version : 1.0.0");
-        System.out.println("Welcome to the Palindrome Checker Application!");
-        System.out.println("Program ready...\n");
-
-        // UC4 — Character Array Based Palindrome
-        String word = "level";
-        char[] chars = word.toCharArray();
-
-        boolean isPalindrome = true;
-
-        for (int i = 0; i < chars.length / 2; i++) {
-            if (chars[i] != chars[chars.length - 1 - i]) {
-                isPalindrome = false;
-                break;
-            }
+// Push characters
+for (int i = 0; i < wordUC5.length(); i++) {
+        stack.push(wordUC5.charAt(i));
         }
 
-        if (isPalindrome) {
-            System.out.println(word + " is a Palindrome");
-        } else {
-            System.out.println(word + " is NOT a Palindrome");
-        }
-    }
+// Build reversed word using stack
+String reversed = "";
+
+while (!stack.isEmpty()) {
+reversed += stack.pop();
+}
+
+// Compare
+        if (wordUC5.equals(reversed)) {
+        System.out.println(wordUC5 + " is a Palindrome (Stack Method)");
+} else {
+        System.out.println(wordUC5 + " is NOT a Palindrome (Stack Method)");
 }
