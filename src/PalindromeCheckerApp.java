@@ -1,34 +1,53 @@
-class PalindromeService {
+import java.util.*;
 
-    public boolean isPalindrome(String input) {
+public class PalindromeCheckerApp {
 
-        String cleaned = input.replaceAll("\\s+", "").toLowerCase();
+    // ===== UC12 — Strategy Pattern =====
 
-        int left = 0;
-        int right = cleaned.length() - 1;
-
-        while (left < right) {
-            if (cleaned.charAt(left) != cleaned.charAt(right))
-                return false;
-            left++;
-            right--;
-        }
-
-        return true;
+    // Strategy Interface
+    interface PalindromeStrategy {
+        boolean check(String input);
     }
-}
 
-public class UC11_PalindromeService {
+    // Strategy 1 — Reverse String Method
+    static class ReverseStrategy implements PalindromeStrategy {
+        public boolean check(String input) {
+            String reversed = new StringBuilder(input).reverse().toString();
+            return input.equalsIgnoreCase(reversed);
+        }
+    }
 
+    // Strategy 2 — Two Pointer Method
+    static class TwoPointerStrategy implements PalindromeStrategy {
+        public boolean check(String input) {
+
+            input = input.toLowerCase();
+            int left = 0;
+            int right = input.length() - 1;
+
+            while (left < right) {
+                if (input.charAt(left) != input.charAt(right))
+                    return false;
+                left++;
+                right--;
+            }
+            return true;
+        }
+    }
+
+    // ===== MAIN METHOD =====
     public static void main(String[] args) {
 
-        PalindromeService service = new PalindromeService();
+        String word = "Level";
 
-        String text = "Madam";
+        PalindromeStrategy strategy;
 
-        boolean result = service.isPalindrome(text);
+        // Using Reverse Strategy
+        strategy = new ReverseStrategy();
+        System.out.println("Reverse Strategy: " + strategy.check(word));
 
-        System.out.println(text +
-                (result ? " is Palindrome" : " is NOT Palindrome"));
+        // Using Two Pointer Strategy
+        strategy = new TwoPointerStrategy();
+        System.out.println("Two Pointer Strategy: " + strategy.check(word));
     }
 }
